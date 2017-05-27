@@ -1,0 +1,24 @@
+#Dev version to grab files from my local machine
+
+version: '3' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  angular: # name of the first service
+    build: /home/sapporo/DeepLearning/docker-dev-test/client-test # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" # specify port forewarding
+    volumes:
+      - /home/sapporo/DeepLearning/GardenApp/client-app:/usr/src/garden-app-dev
+
+  express: #name of the second service
+    build: express-server # specify the directory of the Dockerfile
+    ports:
+      - "3000:3000" #specify ports forewarding
+    links:
+      - database # link this service to the database service
+
+  database: # name of the third service
+    image: mongo # specify image to build container from
+    ports:
+      - "27017:27017" # specify port forewarding
