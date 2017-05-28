@@ -4,15 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { FlowerListComponent } from './flower-list/flower-list.component';
+import { FlowerComponent } from './flower/flower.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+  ],
+  declarations: [
+    AppComponent,
+    HomepageComponent,
+    FlowerComponent,
+    NavigationComponent,
+    FlowerListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
