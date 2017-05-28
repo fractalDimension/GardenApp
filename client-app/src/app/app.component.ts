@@ -11,10 +11,4 @@ import 'rxjs/add/operator/map';
 })
 export class AppComponent {
   title = 'Garden App';
-
-  // Link to our api, pointing to localhost
-  API = 'http://localhost:3000';
-
-  constructor(private http: Http) {}
-
 }

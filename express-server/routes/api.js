@@ -1,60 +1,35 @@
 // Import dependencies
 const mongoose = require('mongoose');
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 
 // MongoDB URL from the docker-compose file
 const dbHost = 'mongodb://database/mean-docker';
 
+// Mock data API
+const APIAxios = 'https://jsonplaceholder.typicode.com';
+
 // Connect to mongodb
 mongoose.connect(dbHost);
-
-// create mongoose schema
-const userSchema = new mongoose.Schema({
-  name: String,
-  age: Number
-});
-
-// create mongoose model
-const User = mongoose.model('User', userSchema);
 
 /* GET api listing. */
 router.get('/', (req, res) => {
         res.send('api works');
 });
 
-/* GET all users. */
-router.get('/users', (req, res) => {
-    User.find({}, (err, users) => {
-        if (err) res.status(500).send(error)
-
-        res.status(200).json(users);
+// Get all posts
+router.get('/posts', (req, res) => {
+  // Get posts from the mock api
+  // This should ideally be replaced with a service that connects to MongoDB
+  axios.get(`${APIAxios}/posts`)
+    .then(posts => {
+      res.status(200).json(posts.data);
+    })
+    .catch(error => {
+      res.status(500).send(error)
     });
 });
 
-/* GET one users. */
-router.get('/users/:id', (req, res) => {
-    User.findById(req.param.id, (err, users) => {
-        if (err) res.status(500).send(error)
-
-        res.status(200).json(users);
-    });
-});
-
-/* Create a user. */
-router.post('/users', (req, res) => {
-    let user = new User({
-        name: req.body.name,
-        age: req.body.age
-    });
-
-    user.save(error => {
-        if (error) res.status(500).send(error);
-
-        res.status(201).json({
-            message: 'User created successfully'
-        });
-    });
-});
 
 module.exports = router;

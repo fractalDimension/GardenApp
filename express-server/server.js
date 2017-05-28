@@ -23,8 +23,10 @@ app.use(function(req, res, next) {
 // Set our api routes
 app.use('/', api);
 
-// Set our api routes
-app.use('/', api);
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './index.html'));
+});
 
 /**
  * Get port from environment and store in Express.

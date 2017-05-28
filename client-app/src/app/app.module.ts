@@ -11,6 +11,10 @@ import { FlowerComponent } from './flower/flower.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
+// Delete posts later
+import { FakePostsComponent } from './fake-posts/fake-posts.component';
+import { PostsService } from './shared/posts.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -22,9 +26,10 @@ import { AppRoutingModule } from './app-routing.module';
     HomepageComponent,
     FlowerComponent,
     NavigationComponent,
-    FlowerListComponent
+    FlowerListComponent,
+    FakePostsComponent
   ],
-  providers: [],
+  providers: [PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
