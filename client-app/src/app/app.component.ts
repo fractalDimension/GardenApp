@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 
 // Import rxjs map operator
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/map';
+
+import { InitFlowerDbService } from './shared/init-flower-db.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +12,7 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Garden App';
+  constructor (private initFlowerDbService: InitFlowerDbService) {
+    initFlowerDbService.ngOnInit();
+  }
 }
