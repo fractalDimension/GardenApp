@@ -17,8 +17,12 @@ import { FakePostsComponent } from './fake-posts/fake-posts.component';
 import { PostsService } from './shared/posts.service';
 import { FlowersService } from './shared/flowers.service';
 import { InitFlowerDbService } from './shared/init-flower-db.service';
-import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+
 import { NgbdProgressbarBasicComponent } from './shared/ng-bootstrap/ngbd-progressbar-basic/ngbd-progressbar-basic.component';
+
+import { GridfsUploadComponent } from './image-uploader-test/gridfs-upload/gridfs-upload.component';
+import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+
 
 @NgModule({
   imports: [
@@ -34,8 +38,9 @@ import { NgbdProgressbarBasicComponent } from './shared/ng-bootstrap/ngbd-progre
     NavigationComponent,
     FlowerListComponent,
     FakePostsComponent,
-    ImageUploaderComponent,
-    NgbdProgressbarBasicComponent
+    NgbdProgressbarBasicComponent,
+    GridfsUploadComponent,
+    FileSelectDirective
   ],
   providers: [PostsService, FlowersService, InitFlowerDbService],
   bootstrap: [AppComponent]

@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Flower } from './flower.model';
-
-// https://coryrylan.com/blog/angular-observable-data-services
 
 @Injectable()
 export class FlowersService {

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageUploaderComponent } from './image-uploader.component';
+import { GridfsUploadComponent } from './gridfs-upload.component';
 
-describe('ImageUploaderComponent', () => {
-  let component: ImageUploaderComponent;
-  let fixture: ComponentFixture<ImageUploaderComponent>;
+describe('GridfsUploadComponent', () => {
+  let component: GridfsUploadComponent;
+  let fixture: ComponentFixture<GridfsUploadComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageUploaderComponent ]
+      declarations: [ GridfsUploadComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageUploaderComponent);
+    fixture = TestBed.createComponent(GridfsUploadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
