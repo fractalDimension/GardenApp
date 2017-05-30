@@ -5,7 +5,7 @@ version: '3' # specify docker-compose version
 # Define the services/containers to be run
 services:
   angular: # name of the first service
-    build: /home/sapporo/DeepLearning/docker-dev-test/client-test # specify the directory of the Dockerfile
+    build: /home/sapporo/DeepLearning/GardenApp/client-app-dev # specify the directory of the Dockerfile
     ports:
       - "4200:4200" # specify port forewarding
     volumes:
@@ -22,3 +22,5 @@ services:
     image: mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
+    volumes: 
+      - /home/sapporo/DeepLearning/GardenApp/database:/data/db
