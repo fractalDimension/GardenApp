@@ -1,13 +1,21 @@
 <div class="card card-block bg-faded">
-	<p>File upload test</p>
+  <p>File upload test</p>
 
-	<div class="form-group">
-	   <label for="single">single</label>
-	   <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />                                  
-	</div>
+  <div class="form-group">
+     <label for="single">single</label>
+     <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />                                  
+  </div>
 
-	<button type="button" class="btn btn-success btn-s"
-	   (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-	    <span class="glyphicon glyphicon-upload"></span> Upload all
-	</button><br />
+  <button type="button" class="btn btn-success btn-s"
+     (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length ">
+      <span class="glyphicon glyphicon-upload"></span> Upload all
+  </button><br />
+  <ol *ngFor="let item of uploader.queue">
+    <li>
+      <span>loaded </span>
+      <span *ngIf="item.isSuccess"><p>success</p></span>
+      <span *ngIf="item.isError"><p>error</p></span>
+    </li>
+  </ol>
+  
 </div>

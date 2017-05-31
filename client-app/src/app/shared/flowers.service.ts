@@ -13,7 +13,7 @@ export class FlowersService {
 
   constructor(private http: Http) { }
 
-  // Get all flowerss from the API
+  // Get all flowers from the API
   getAllFlowers(): Observable<Flower[]> {
     return this.http.get(this.API)
       .map(response => response.json() as Flower)
