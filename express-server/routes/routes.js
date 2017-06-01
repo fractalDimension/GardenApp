@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.route('/classifyImage').post(classifyCtrl.classifyImage);
-router.route('/uploadedImages/:filename').get(classifyCtrl.getClassifiedImage);
+router.route('/allClassifiedImages').get(classifyCtrl.getListOfAllClassifiedImages);
 
 router.route('/flowers').get(flowersCtrl.getAllFlowers);
 router.route('/flowers/:name').get(flowersCtrl.getFlowerByName);

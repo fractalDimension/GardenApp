@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-console.log('flowers API loaded');
-
 // Create the schemas
 const Schema = mongoose.Schema;
 
@@ -47,3 +45,5 @@ module.exports ={
     });
   }
 }
+
+console.log('clasify API loaded');
