@@ -1,0 +1,9 @@
+<div class="container">
+  <p>
+    Classified images list
+  </p>
+  
+  <div class="row" *ngFor="let image of classifiedImages">
+    <app-classified-image [image]="image"></app-classified-image>
+  </div>
+</div>
