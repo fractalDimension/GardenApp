@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 router.route('/classifyImage').post(classifyCtrl.classifyImage);
 router.route('/allClassifiedImages').get(classifyCtrl.getListOfAllClassifiedImages);
+router.route('/classifiedImages/:imageName').get(classifyCtrl.getClassifiedImageData);
 
 router.route('/flowers').get(flowersCtrl.getAllFlowers);
 router.route('/flowers/:name').get(flowersCtrl.getFlowerByName);

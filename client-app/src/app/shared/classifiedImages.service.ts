@@ -20,6 +20,13 @@ export class ClassifiedImagesService {
       .catch(this.handleError);
   }
 
+  // Get single classified image data by image name
+  getClassifiedImageData(): Observable<any> {
+    return this.http.get(this.allImagesAPI)
+      .map(response => response.json() as ClassifiedImage)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Observable<any> {
     console.error('An error occurred fetching ClassifiedImage(s)', error); // for demo purposes only
     return Observable.throw(error.json().error || 'Error fetching ClassifiedImage(s)');
