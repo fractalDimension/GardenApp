@@ -46,4 +46,4 @@ module.exports ={
   }
 }
 
-console.log('clasify API loaded');
+console.log('-- flower API loaded --');

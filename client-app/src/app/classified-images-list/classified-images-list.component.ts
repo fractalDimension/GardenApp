@@ -17,6 +17,7 @@ export class ClassifiedImagesListComponent implements OnInit {
     this.getAllClassifiedImages();
   }
 
+  // TODO make this async in results on flower upload
   getAllClassifiedImages() {
     this.classifiedImagesService.getAllClassifiedImages().subscribe(classifiedImages => {
       console.log('subscribed in classifiedImages list');
