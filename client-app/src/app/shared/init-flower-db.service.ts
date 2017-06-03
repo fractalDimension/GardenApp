@@ -26,21 +26,14 @@ export class InitFlowerDbService implements OnInit  {
 
   checkFlowers() {
     this.flowersService.getAllFlowers().subscribe(flowers => {
-      console.log(flowers);
-
-      if (flowers.length > 1) {
-        console.log('Entries present');
-      } else {
-        console.log('Empty at start up. Adding entries.');
+      if (flowers.length < 1) {
+        console.log('Flowers at start up. Adding entries.');
         this.FLOWERS.map(flower => {
-          console.log(flower);
           this.flowersService.addFlower(flower).subscribe(() => {
             this.getFlowers();
           });
         });
-        console.log(this.initFlowers);
       }
-      console.log('Finished check');
     });
   }
 

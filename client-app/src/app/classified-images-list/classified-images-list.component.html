@@ -3,7 +3,7 @@
     Classified images list
   </p>
   
-  <div class="row" *ngFor="let image of classifiedImages">
+  <div class="row" *ngFor="let image of classifiedImages | async">
     <app-classified-image [image]="image"></app-classified-image>
   </div>
 </div>

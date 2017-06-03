@@ -13,7 +13,7 @@
   <ol *ngFor="let item of uploader.queue">
     <li>
       <span>loaded </span>
-      <span *ngIf="item.isSuccess"><p>success</p></span>
+      <span *ngIf="item.isSuccess" refreshImages ><p>success</p></span>
       <span *ngIf="item.isError"><p>error</p></span>
     </li>
   </ol>
