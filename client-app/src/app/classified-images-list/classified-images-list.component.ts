@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable }        from 'rxjs/Observable';
 
 import { ClassifiedImage } from 'app/shared/classifiedImage.model';
 import { ClassifiedImagesService } from 'app/shared/classifiedImages.service';
@@ -9,20 +10,14 @@ import { ClassifiedImagesService } from 'app/shared/classifiedImages.service';
   styleUrls: ['./classified-images-list.component.css']
 })
 export class ClassifiedImagesListComponent implements OnInit {
-  classifiedImages: ClassifiedImage[];
+  // TODO pipe this data directly into the html
+  classifiedImages: Observable<ClassifiedImage[]>;
 
   constructor(private classifiedImagesService: ClassifiedImagesService) { }
 
   ngOnInit() {
-    this.getAllClassifiedImages();
+    this.classifiedImages = this.classifiedImagesService.awaitData();
   }
 
-  // TODO make this async in results on flower upload
-  getAllClassifiedImages() {
-    this.classifiedImagesService.getAllClassifiedImages().subscribe(classifiedImages => {
-      console.log('subscribed in classifiedImages list');
-      this.classifiedImages = classifiedImages;
-    });
-  }
 
 }

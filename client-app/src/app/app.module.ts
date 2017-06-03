@@ -24,6 +24,7 @@ import { InitFlowerDbService } from './shared/init-flower-db.service';
 
 // Directives
 import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { RefreshClassifiedImageListDirective } from 'app/shared/refresh-after-upload.directive';
 
 // App Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -45,7 +46,8 @@ import { AppRoutingModule } from './app-routing.module';
     FileSelectDirective,
     ClassifiedImagesListComponent,
     ClassifiedImageComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    RefreshClassifiedImageListDirective
   ],
   providers: [FlowersService, ClassifiedImagesService, InitFlowerDbService],
   bootstrap: [AppComponent]

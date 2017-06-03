@@ -55,9 +55,13 @@ module.exports = {
           console.log(err);
           throw err;
         }
+        
+
+        // save image data to mongo
         console.log('-- Saving %s to mongo-- ', newImage.image_name );
         newImage.img.data = fsData;
         newImage.save();
+        // classify image in the save call back
       });
       if(uploadError){
         console.log(uploadError);
@@ -75,6 +79,7 @@ module.exports = {
       res.status(200).json(classifiedImages);
     });
   },
+  // TODO get single classified image document by name
   getClassifiedImageData : (req, res) => {
     const imageName = req.params.imageName;
     ImageDb.findOne({ 'image_name': imageName }, (err, classifiedImage) => {
