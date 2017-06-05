@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable }        from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { ClassifiedImage } from 'app/shared/classifiedImage.model';
 import { ClassifiedImagesService } from 'app/shared/classifiedImages.service';

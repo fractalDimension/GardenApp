@@ -12,19 +12,16 @@ import { FlowerListComponent } from './flower-list/flower-list.component';
 import { FlowerComponent } from './flower/flower.component';
 import { ClassifiedImagesListComponent } from './classified-images-list/classified-images-list.component';
 import { ClassifiedImageComponent } from './classified-image/classified-image.component';
-import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 // Angular bootstrap components
+// TODO use this with file upload and multer in image-upload component
 import { NgbdProgressbarBasicComponent } from './shared/ng-bootstrap/ngbd-progressbar-basic/ngbd-progressbar-basic.component';
 
 // Services
 import { FlowersService } from './shared/flowers.service';
 import { ClassifiedImagesService } from './shared/classifiedImages.service';
 import { InitFlowerDbService } from './shared/init-flower-db.service';
-
-// Directives
-import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-import { RefreshClassifiedImageListDirective } from 'app/shared/refresh-after-upload.directive';
 
 // App Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -43,11 +40,9 @@ import { AppRoutingModule } from './app-routing.module';
     NavigationComponent,
     FlowerListComponent,
     NgbdProgressbarBasicComponent,
-    FileSelectDirective,
     ClassifiedImagesListComponent,
     ClassifiedImageComponent,
-    ImageUploaderComponent,
-    RefreshClassifiedImageListDirective
+    ImageUploadComponent
   ],
   providers: [FlowersService, ClassifiedImagesService, InitFlowerDbService],
   bootstrap: [AppComponent]

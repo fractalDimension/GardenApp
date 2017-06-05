@@ -2,5 +2,8 @@
   <div class="card-block">
     <h4 class="card-title">{{image.image_name}}</h4>
     <img [src]="image.image_path">
+    <div *ngFor="let prediction of image.predictions">
+    	<li>{{prediction.model_version}}</li>
+    </div>
   </div>
 </div>

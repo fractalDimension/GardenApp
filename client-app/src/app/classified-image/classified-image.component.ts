@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { ClassifiedImage } from 'app/shared/classifiedImage.model';
 
@@ -8,7 +9,7 @@ import { ClassifiedImage } from 'app/shared/classifiedImage.model';
   styleUrls: ['./classified-image.component.css']
 })
 export class ClassifiedImageComponent implements OnInit {
-  @Input() image: ClassifiedImage;
+  @Input() image: Observable<ClassifiedImage>;
 
   constructor() { }
 

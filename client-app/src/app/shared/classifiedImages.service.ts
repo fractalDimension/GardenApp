@@ -1,5 +1,6 @@
 /*
-https://www.lucidchart.com/techblog/2016/11/08/angular-2-and-observables-data-sharing-in-a-multi-view-application/
+ * for awaitData() and refresh() see:
+ * https://www.lucidchart.com/techblog/2016/11/08/angular-2-and-observables-data-sharing-in-a-multi-view-application/
 */
 
 import { Injectable } from '@angular/core';
@@ -13,6 +14,7 @@ import { ClassifiedImage } from './classifiedImage.model';
 export class ClassifiedImagesService {
   // Link to our APIs, pointing to localhost
   private allImagesAPI = 'http://localhost:3000/allClassifiedImages';
+  private classifyImageAPI = 'http://localhost:3000/classifyImage';
   private _classifiedImages = <BehaviorSubject<ClassifiedImage[]>>new BehaviorSubject([]);
   private fetching: boolean;
 
@@ -42,6 +44,13 @@ export class ClassifiedImagesService {
     });
   }
 
+  // upload image file to mongodb and classify with tensorflow
+  uploadAndClassify(imageFormData: FormData): Observable<any> {
+    return this.http.post(this.classifyImageAPI, imageFormData)
+                .map(response => response.json())
+                .catch(this.handleError);
+  }
+
   // Get all classified images from the API
   private getAllImages(): Observable<ClassifiedImage[]> {
     return this.http.get(this.allImagesAPI)
@@ -57,10 +66,10 @@ export class ClassifiedImagesService {
   }
 
   /* helper functions */
-
+  // TODO better error handling
   private handleError(error: any): Observable<any> {
-    console.error('An error occurred fetching ClassifiedImage(s)', error); // for demo purposes only
-    return Observable.throw(error.json().error || 'Error fetching ClassifiedImage(s)');
+    console.error('Error in ClassifiedImagesService: ', error); // for demo purposes only
+    return Observable.throw(error.json().error || 'Error in ClassifiedImagesService');
   }
 
   private isEmpty(val) {
