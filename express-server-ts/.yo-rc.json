@@ -1,0 +1,8 @@
+{
+  "generator-next": {
+    "user": "fractalDimension",
+    "email": "arc.iniegam@gmail.com",
+    "port": "3000",
+    "appname": "docker-express-typescript"
+  }
+}
