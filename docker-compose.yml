@@ -11,12 +11,14 @@ services:
     volumes:
       - /home/sapporo/DeepLearning/GardenApp/client-app:/usr/src/garden-app-dev
 
-  express: #name of the second service
-    build: express-server # specify the directory of the Dockerfile
+  express-ts: #name of the second service
+    build: express-server-ts # specify the directory of the Dockerfile
     ports:
       - "3000:3000" #specify ports forewarding
     links:
       - database # link this service to the database service
+    volumes:
+      - /home/sapporo/DeepLearning/GardenApp/express-server-ts:/usr/src/express-app
 
   database: # name of the third service
     image: mongo # specify image to build container from

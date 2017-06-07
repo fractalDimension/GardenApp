@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+import { mongoose } from '../../config/database';
+import { Schema } from 'mongoose';
+
 const ClassifySchema = mongoose.Schema;
 
 const imageSchema = new ClassifySchema({
@@ -20,8 +22,6 @@ const imageSchema = new ClassifySchema({
   ]
 });
 
-module.exports = {
-  imageDbModel: () => {
-    return mongoose.model('ImageDb', imageSchema);;
-  }
-}
+
+export imageDbModel = mongoose.model('ImageDb', imageSchema);
+
