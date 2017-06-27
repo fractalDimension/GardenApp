@@ -1,0 +1,22 @@
+"use strict";
+class FlowerModel {
+    constructor(flowerModel) {
+        this._flowerModel = flowerModel;
+    }
+    get common_name() {
+        return this._flowerModel.common_name;
+    }
+    get sci_name() {
+        return this._flowerModel.sci_name;
+    }
+    get wiki_link() {
+        return this._flowerModel.wiki_link;
+    }
+    get in_garden() {
+        return this._flowerModel.in_garden;
+    }
+}
+Object.seal(FlowerModel);
+module.exports = FlowerModel;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kZWwvRmxvd2VyTW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUVBO0lBSUUsWUFBWSxXQUF5QjtRQUNuQyxJQUFJLENBQUMsWUFBWSxHQUFHLFdBQVcsQ0FBQztJQUNsQyxDQUFDO0lBQ0QsSUFBSSxXQUFXO1FBQ2IsTUFBTSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsV0FBVyxDQUFDO0lBQ3ZDLENBQUM7SUFFRCxJQUFJLFFBQVE7UUFDVixNQUFNLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUM7SUFDcEMsQ0FBQztJQUVELElBQUksU0FBUztRQUNYLE1BQU0sQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQztJQUNyQyxDQUFDO0lBRUQsSUFBSSxTQUFTO1FBQ1gsTUFBTSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDO0lBQ3JDLENBQUM7Q0FFRjtBQUNELE1BQU0sQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7QUFDekIsaUJBQVUsV0FBVyxDQUFDIiwiZmlsZSI6InNyYy9hcHAvbW9kZWwvRmxvd2VyTW9kZWwuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgSUZsb3dlck1vZGVsID0gcmVxdWlyZSgnLi9pbnRlcmZhY2VzL0Zsb3dlck1vZGVsJyk7XG5cbmNsYXNzIEZsb3dlck1vZGVsIHtcblxuICBwcml2YXRlIF9mbG93ZXJNb2RlbDogSUZsb3dlck1vZGVsO1xuXG4gIGNvbnN0cnVjdG9yKGZsb3dlck1vZGVsOiBJRmxvd2VyTW9kZWwpIHtcbiAgICB0aGlzLl9mbG93ZXJNb2RlbCA9IGZsb3dlck1vZGVsO1xuICB9XG4gIGdldCBjb21tb25fbmFtZSAoKTogc3RyaW5nIHtcbiAgICByZXR1cm4gdGhpcy5fZmxvd2VyTW9kZWwuY29tbW9uX25hbWU7XG4gIH1cblxuICBnZXQgc2NpX25hbWUgKCk6IHN0cmluZyB7XG4gICAgcmV0dXJuIHRoaXMuX2Zsb3dlck1vZGVsLnNjaV9uYW1lO1xuICB9XG5cbiAgZ2V0IHdpa2lfbGluayAoKTogc3RyaW5nIHtcbiAgICByZXR1cm4gdGhpcy5fZmxvd2VyTW9kZWwud2lraV9saW5rO1xuICB9XG5cbiAgZ2V0IGluX2dhcmRlbiAoKTogYm9vbGVhbiB7XG4gICAgcmV0dXJuIHRoaXMuX2Zsb3dlck1vZGVsLmluX2dhcmRlbjtcbiAgfVxuXG59XG5PYmplY3Quc2VhbChGbG93ZXJNb2RlbCk7XG5leHBvcnQgPSAgRmxvd2VyTW9kZWw7XG4iXX0=

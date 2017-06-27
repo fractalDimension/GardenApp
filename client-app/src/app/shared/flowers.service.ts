@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Flower } from './flower.model';
@@ -32,12 +32,16 @@ export class FlowersService {
 
   // Add flower by the API
   addFlower(flower: Flower): Observable<Flower> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
     console.log('trying to add flower');
-    return this.http.post(this.API, flower)
+    return this.http.post(this.API, flower, options )
       					.map(response => response.json() as Flower)
       					.catch(this.handleError);
   }
 
+  // TODO backend sends errors differently now
   private handleError(error: any): Observable<any> {
     console.error('An error occurred fetching flower(s)', error); // for demo purposes only
     return Observable.throw(error.json().error || 'Error fetching flower(s)');

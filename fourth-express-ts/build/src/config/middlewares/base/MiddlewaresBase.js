@@ -1,0 +1,20 @@
+"use strict";
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const MethodOverride = require("./../MethodOverride");
+const BaseRoutes = require("./../../routes/base/BaseRoutes");
+class MiddlewaresBase {
+    static get configuration() {
+        const app = express();
+        app.use(bodyParser.json());
+        app.use(MethodOverride.configuration());
+        app.use(cors()); // could be dangerous, probably should enable on per route basis
+        app.use(new BaseRoutes().routes);
+        return app;
+    }
+}
+Object.seal(MiddlewaresBase);
+module.exports = MiddlewaresBase;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb25maWcvbWlkZGxld2FyZXMvYmFzZS9NaWRkbGV3YXJlc0Jhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLG1DQUFvQztBQUNwQywwQ0FBMkM7QUFDM0MsNkJBQThCO0FBRTlCLHNEQUF1RDtBQUN2RCw2REFBOEQ7QUFHOUQ7SUFFRSxNQUFNLEtBQUssYUFBYTtRQUN0QixNQUFNLEdBQUcsR0FBRyxPQUFPLEVBQUUsQ0FBQztRQUN0QixHQUFHLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQzNCLEdBQUcsQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUFDLGFBQWEsRUFBRSxDQUFDLENBQUM7UUFDeEMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUMsZ0VBQWdFO1FBQ2pGLEdBQUcsQ0FBQyxHQUFHLENBQUMsSUFBSSxVQUFVLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUVqQyxNQUFNLENBQUMsR0FBRyxDQUFDO0lBQ2IsQ0FBQztDQUNGO0FBQ0QsTUFBTSxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQztBQUM3QixpQkFBUyxlQUFlLENBQUMiLCJmaWxlIjoic3JjL2NvbmZpZy9taWRkbGV3YXJlcy9iYXNlL01pZGRsZXdhcmVzQmFzZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpO1xuaW1wb3J0IGJvZHlQYXJzZXIgPSByZXF1aXJlKCdib2R5LXBhcnNlcicpO1xuaW1wb3J0IGNvcnMgPSByZXF1aXJlKCdjb3JzJyk7XG5cbmltcG9ydCBNZXRob2RPdmVycmlkZSA9IHJlcXVpcmUoJy4vLi4vTWV0aG9kT3ZlcnJpZGUnKTtcbmltcG9ydCBCYXNlUm91dGVzID0gcmVxdWlyZSgnLi8uLi8uLi9yb3V0ZXMvYmFzZS9CYXNlUm91dGVzJyk7XG5cblxuY2xhc3MgTWlkZGxld2FyZXNCYXNlIHtcblxuICBzdGF0aWMgZ2V0IGNvbmZpZ3VyYXRpb24gKCkge1xuICAgIGNvbnN0IGFwcCA9IGV4cHJlc3MoKTtcbiAgICBhcHAudXNlKGJvZHlQYXJzZXIuanNvbigpKTtcbiAgICBhcHAudXNlKE1ldGhvZE92ZXJyaWRlLmNvbmZpZ3VyYXRpb24oKSk7XG4gICAgYXBwLnVzZShjb3JzKCkpOyAvLyBjb3VsZCBiZSBkYW5nZXJvdXMsIHByb2JhYmx5IHNob3VsZCBlbmFibGUgb24gcGVyIHJvdXRlIGJhc2lzXG4gICAgYXBwLnVzZShuZXcgQmFzZVJvdXRlcygpLnJvdXRlcyk7XG5cbiAgICByZXR1cm4gYXBwO1xuICB9XG59XG5PYmplY3Quc2VhbChNaWRkbGV3YXJlc0Jhc2UpO1xuZXhwb3J0ID0gTWlkZGxld2FyZXNCYXNlO1xuIl19
