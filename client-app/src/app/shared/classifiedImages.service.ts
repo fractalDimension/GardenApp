@@ -46,6 +46,8 @@ export class ClassifiedImagesService {
 
   // upload image file to mongodb and classify with tensorflow
   uploadAndClassify(imageFormData: FormData): Observable<any> {
+    console.log('trying to clasify');
+    console.log(imageFormData);
     return this.http.post(this.classifyImageAPI, imageFormData)
                 .map(response => response.json())
                 .catch(this.handleError);

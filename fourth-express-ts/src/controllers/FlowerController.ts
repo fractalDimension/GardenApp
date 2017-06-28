@@ -28,10 +28,10 @@ class FlowerController implements IBaseController <FlowerBusiness> {
   }
   update(req: express.Request, res: express.Response): void {
     try {
-      const hero: IFlowerModel = <IFlowerModel>req.body;
+      const flower: IFlowerModel = <IFlowerModel>req.body;
       const _id: string = req.params._id;
       const flowerBusiness = new FlowerBusiness();
-      flowerBusiness.update(_id, hero, (error: any, result: any) => {
+      flowerBusiness.update(_id, flower, (error: any, result: any) => {
         if (error) {
           res.send({'error': 'error'});
         } else {
