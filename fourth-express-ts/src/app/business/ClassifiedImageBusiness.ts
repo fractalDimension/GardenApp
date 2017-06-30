@@ -4,8 +4,9 @@ import IClassifiedImageBusiness = require('./interfaces/ClassifiedImageBusiness'
 import IClassifiedImageModel = require('./../model/interfaces/ClassifiedImageModel');
 import ClassifiedImageModel = require('./../model/ClassifiedImageModel');
 import IMulterFileModel = require('./../model/interfaces/MulterFileModel');
+import date = require('date-and-time');
 
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 
 class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
@@ -16,16 +17,39 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
   }
 
   create (req: Request & {file: IMulterFileModel}, callback: (error: any, result: any) => void) {
-    console.log('i tried to do something before saving the file');
 
+    console.log('trying to save the file named: ', req.file.originalname);
 
-    const fileName = req.file.originalname;
-    console.log(fileName);
+    // TODO move this section into a helper function
+    const imageToClassify: IClassifiedImageModel = <IClassifiedImageModel>{};
+    imageToClassify.image_name = req.file.originalname;
+    imageToClassify.date_uploaded = date.format(new Date(), 'YYYY/MM/DD HH:mm:ss');
+    imageToClassify.img = {
+      data: req.file.buffer,
+      content_type: getFileType(req.file.originalname)
+    };
 
-    const flower: IClassifiedImageModel = <IClassifiedImageModel>req.body;
+    this._classifiedImageRepository.create(imageToClassify, callback);
+  }
 
+  classify (res: Response, callback: (error: any, result: any) => void) {
+    console.log('I should do something with this id: ', res.locals._id);
 
-    this._classifiedImageRepository.create(flower, callback);
+    function sleep(ms: any) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function demo() {
+      console.log('Simulate 3 sec classify time');
+      await sleep(3000);
+      console.log('done classifying');
+
+      const err: any = null;
+      const result = 'good jorb';
+      callback(err, result);
+    }
+
+    demo();
   }
 
   retrieve (callback: (error: any, result: any) => void) {
@@ -56,3 +80,8 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
 
 Object.seal(ClassifiedImageBusiness);
 export = ClassifiedImageBusiness;
+
+
+function getFileType( fileName: string ) {
+  return 'image/' + fileName.split('.').slice(-1)[0];
+}

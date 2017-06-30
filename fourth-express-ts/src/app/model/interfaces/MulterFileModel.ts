@@ -5,6 +5,7 @@ interface MulterFile {
   mimetype: string;
   originalname: string;
   size: number;
+  buffer: Buffer; // actual data
 }
 
 export = MulterFile;

@@ -15,10 +15,6 @@ class ClassifiedImageSchema {
         type: String,
         required: true
       },
-      image_path: {
-        type: String,
-        required: true,
-      },
       date_uploaded: {
         type: Date,
         required: true

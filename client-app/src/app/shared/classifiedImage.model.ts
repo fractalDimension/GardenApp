@@ -1,8 +1,8 @@
 // reference classifiedImageModel in /db_Models on express server
 
 export class ClassifiedImage {
+  _id: string;
   image_name: string;
-  image_path: string;
   // date ?
   predictions: [
     {
