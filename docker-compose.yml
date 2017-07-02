@@ -5,24 +5,24 @@ version: '3' # specify docker-compose version
 # Define the services/containers to be run
 services:
   angular: # name of the first service
-    build: /home/sapporo/DeepLearning/GardenApp/client-app-dev # specify the directory of the Dockerfile
+    build: /home/sapporo/Coding/DeepLearning/GardenApp/client-app-dev # specify the directory of the Dockerfile
     ports:
       - "4200:4200" # specify port forewarding
     volumes:
-      - /home/sapporo/DeepLearning/GardenApp/client-app:/usr/src/garden-app-dev
+      - /home/sapporo/Coding/DeepLearning/GardenApp/client-app:/usr/src/garden-app-dev
 
   express-ts: #name of the second service
-    build: express-server-ts # specify the directory of the Dockerfile
+    build: express-ts-server # specify the directory of the Dockerfile
     ports:
       - "3000:3000" #specify ports forewarding
     links:
       - database # link this service to the database service
     volumes:
-      - /home/sapporo/DeepLearning/GardenApp/express-server-ts:/usr/src/express-app
+      - /home/sapporo/Coding/DeepLearning/GardenApp/express-ts-server:/usr/src/express-ts-app
 
   database: # name of the third service
     image: mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
     volumes: 
-      - /home/sapporo/DeepLearning/GardenApp/database:/data/db
+      - /home/sapporo/Coding/DeepLearning/GardenApp/database:/data/db
