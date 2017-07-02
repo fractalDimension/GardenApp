@@ -1,4 +1,6 @@
 // <reference path='../../../typings/tsd.d.ts' />
+
+import { Request, Response } from 'express';
 import ClassifiedImageRepository = require('./../repository/ClassifiedImageRepository');
 import IClassifiedImageBusiness = require('./interfaces/ClassifiedImageBusiness');
 import IClassifiedImageModel = require('./../model/interfaces/ClassifiedImageModel');
@@ -6,7 +8,9 @@ import ClassifiedImageModel = require('./../model/ClassifiedImageModel');
 import IMulterFileModel = require('./../model/interfaces/MulterFileModel');
 import date = require('date-and-time');
 
-import { Request, Response } from 'express';
+import PythonShell = require('python-shell');
+const scriptPath = '/usr/src/express-ts-app/src/python';
+const scriptName = 'helloSnek.py';
 
 
 class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
@@ -35,21 +39,25 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
   classify (res: Response, callback: (error: any, result: any) => void) {
     console.log('I should do something with this id: ', res.locals._id);
 
-    function sleep(ms: any) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    console.log('running python script');
 
-    async function demo() {
-      console.log('Simulate 3 sec classify time');
-      await sleep(3000);
-      console.log('done classifying');
+    const options = {
+      scriptPath: scriptPath,
+      args: ['running with id: ' + res.locals._id]
+    };
 
-      const err: any = null;
-      const result = 'good jorb';
-      callback(err, result);
-    }
-
-    demo();
+    PythonShell.run( scriptName, options, function (err: any, results: any) {
+      if (err) {
+        console.log('error in shell');
+        console.log(err);
+        callback( err, results);
+        // throw err;
+      } else {
+        // results is an array consisting of messages collected during execution
+        console.log('results: %j', results);
+        callback( null, results);
+      }
+    });
   }
 
   retrieve (callback: (error: any, result: any) => void) {
@@ -85,3 +93,4 @@ export = ClassifiedImageBusiness;
 function getFileType( fileName: string ) {
   return 'image/' + fileName.split('.').slice(-1)[0];
 }
+

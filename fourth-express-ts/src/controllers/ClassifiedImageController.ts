@@ -119,7 +119,6 @@ class ClassifiedImageController implements IBaseController <ClassifiedImageBusin
   findImageFileById(req: express.Request, res: express.Response): void {
     try {
       const _id: string = req.params._id;
-      console.log('looking for id: ', _id);
       const classifiedImageBusiness = new ClassifiedImageBusiness();
       classifiedImageBusiness.findById(_id, (error: any, result: any) => {
         if (error) {

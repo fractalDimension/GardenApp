@@ -3,7 +3,6 @@ import mongoose = require('mongoose');
 
 interface ClassifiedImageModel extends mongoose.Document {
   image_name: string;
-  image_path: string;
   date_uploaded: Date;
   img: {
     data: Buffer;

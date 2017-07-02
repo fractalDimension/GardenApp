@@ -3,7 +3,7 @@
 export class ClassifiedImage {
   _id: string;
   image_name: string;
-  // date ?
+  date_uploaded: Date;
   predictions: [
     {
       date: string,

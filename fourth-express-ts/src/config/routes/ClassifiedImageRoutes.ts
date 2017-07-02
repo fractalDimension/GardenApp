@@ -24,8 +24,7 @@ class ClassifiedImageRoutes {
     router.put('/classifiedImages/:_id', controller.update);
     router.get('/classifiedImages/:_id', controller.findById);
     router.get('/classifiedImages/:_id/image', controller.findImageFileById);
-
-    // router.delete('/flowers/:_id', controller.delete);
+    router.delete('/classifiedImages/:_id', controller.delete); // TODO permission this
 
     return router;
   }

@@ -61,9 +61,15 @@ export class ClassifiedImagesService {
       .catch(this.handleError);
   }
 
+  // Delete classified image by id
+  deleteClassifiedImageById( classifiedImageId: string ): Observable<any> {
+    return this.http.delete(this.classifiedImageAPI + classifiedImageId)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+
   // Get classified image file path by id
   getClassifiedImageFilePath( classifiedImageId: string ): string {
-    console.log('lookup id: ', classifiedImageId);
     return this.classifiedImageAPI + classifiedImageId + '/image';
   }
 

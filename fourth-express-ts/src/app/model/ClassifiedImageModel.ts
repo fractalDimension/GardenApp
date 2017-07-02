@@ -11,10 +11,6 @@ class ClassifiedImageModel {
     return this._classifiedImageModel.image_name;
   }
 
-  get image_path (): string {
-    return this._classifiedImageModel.image_path;
-  }
-
   get date_uploaded (): Date {
     return this._classifiedImageModel.date_uploaded;
   }

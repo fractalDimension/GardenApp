@@ -2,13 +2,12 @@
 
 import IRead = require('./../interfaces/base/Read');
 import IWrite = require('./../interfaces/base/Write');
-import IFlowerModel = require('./../../model/interfaces/FlowerModel');
 
 import mongoose = require('mongoose');
 
 class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
-    private _model: mongoose.Model<mongoose.Document>;
+    protected _model: mongoose.Model<mongoose.Document>;
 
     constructor (schemaModel: mongoose.Model<mongoose.Document>) {
         this._model = schemaModel;
@@ -20,11 +19,11 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     }
 
     retrieve (callback: (error: any, result: any) => void) {
-         this._model.find({}, callback);
+        this._model.find({}, callback);
     }
 
     update (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
-            this._model.update({_id: _id}, item, callback);
+        this._model.update({_id: _id}, item, callback);
 
     }
 

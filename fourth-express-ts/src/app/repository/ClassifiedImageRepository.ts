@@ -4,9 +4,14 @@ import ClassifiedImageSchema = require('./../dataAccess/schemas/ClassifiedImageS
 import RepositoryBase = require('./base/RepositoryBase');
 
 class ClassifiedImageRepository  extends RepositoryBase<IClassifiedImageModel> {
-    constructor () {
-        super(ClassifiedImageSchema);
-    }
+  constructor () {
+    super(ClassifiedImageSchema);
+  }
+
+  retrieve (callback: (error: any, result: any) => void) {
+    console.log('override retreive');
+    this._model.find({}).sort('-date_uploaded').exec(callback);
+  }
 }
 
 Object.seal(ClassifiedImageRepository);

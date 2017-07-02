@@ -22,4 +22,12 @@ export class ClassifiedImageComponent implements OnInit {
     return this.classifiedImagesService.getClassifiedImageFilePath( imageId );
   }
 
+  delete( imageId: string ) {
+    this.classifiedImagesService.deleteClassifiedImageById( imageId ).subscribe((response) => {
+      console.log('server said: ', response);
+      this.classifiedImagesService.refresh();
+    });
+
+  }
+
 }
