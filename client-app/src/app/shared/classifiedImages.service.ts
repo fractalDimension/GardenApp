@@ -15,6 +15,7 @@ export class ClassifiedImagesService {
   // Link to our APIs, pointing to localhost
   private allImagesAPI = 'http://localhost:3000/allClassifiedImages';
   private classifyImageAPI = 'http://localhost:3000/classifyImage';
+  private classifiedImageAPI = 'http://localhost:3000/classifiedImages/';
   private _classifiedImages = <BehaviorSubject<ClassifiedImage[]>>new BehaviorSubject([]);
   private fetching: boolean;
 
@@ -46,6 +47,8 @@ export class ClassifiedImagesService {
 
   // upload image file to mongodb and classify with tensorflow
   uploadAndClassify(imageFormData: FormData): Observable<any> {
+    console.log('trying to clasify');
+    console.log(imageFormData);
     return this.http.post(this.classifyImageAPI, imageFormData)
                 .map(response => response.json())
                 .catch(this.handleError);
@@ -58,11 +61,16 @@ export class ClassifiedImagesService {
       .catch(this.handleError);
   }
 
-  // Get single classified image data by image name
-  getClassifiedImageData(): Observable<any> {
-    return this.http.get(this.allImagesAPI)
-      .map(response => response.json() as ClassifiedImage)
+  // Delete classified image by id
+  deleteClassifiedImageById( classifiedImageId: string ): Observable<any> {
+    return this.http.delete(this.classifiedImageAPI + classifiedImageId)
+      .map(response => response.json())
       .catch(this.handleError);
+  }
+
+  // Get classified image file path by id
+  getClassifiedImageFilePath( classifiedImageId: string ): string {
+    return this.classifiedImageAPI + classifiedImageId + '/image';
   }
 
   /* helper functions */

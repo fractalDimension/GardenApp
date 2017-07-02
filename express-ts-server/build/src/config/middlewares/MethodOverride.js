@@ -1,0 +1,17 @@
+"use strict";
+const methodOverride = require("method-override");
+const express = require("express");
+class MethodOverride {
+    static configuration() {
+        const app = express();
+        app.use(methodOverride('X-HTTP-Method'));
+        app.use(methodOverride('X-HTTP-Method-Override'));
+        app.use(methodOverride('X-Method-Override'));
+        app.use(methodOverride('_method'));
+        return app;
+    }
+}
+Object.seal(MethodOverride);
+module.exports = MethodOverride;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb25maWcvbWlkZGxld2FyZXMvTWV0aG9kT3ZlcnJpZGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGtEQUFtRDtBQUNuRCxtQ0FBb0M7QUFFcEM7SUFFRSxNQUFNLENBQUMsYUFBYTtRQUNsQixNQUFNLEdBQUcsR0FBRyxPQUFPLEVBQUUsQ0FBQztRQUN0QixHQUFHLENBQUMsR0FBRyxDQUFDLGNBQWMsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO1FBQ3pDLEdBQUcsQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUFDLHdCQUF3QixDQUFDLENBQUMsQ0FBQztRQUNsRCxHQUFHLENBQUMsR0FBRyxDQUFDLGNBQWMsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLENBQUM7UUFDN0MsR0FBRyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztRQUNuQyxNQUFNLENBQUMsR0FBRyxDQUFDO0lBQ2IsQ0FBQztDQUNGO0FBRUQsTUFBTSxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQztBQUM1QixpQkFBUyxjQUFjLENBQUMiLCJmaWxlIjoic3JjL2NvbmZpZy9taWRkbGV3YXJlcy9NZXRob2RPdmVycmlkZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBtZXRob2RPdmVycmlkZSA9IHJlcXVpcmUoJ21ldGhvZC1vdmVycmlkZScpO1xuaW1wb3J0IGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJyk7XG5cbmNsYXNzIE1ldGhvZE92ZXJyaWRlIHtcblxuICBzdGF0aWMgY29uZmlndXJhdGlvbiAoKTogYW55IHtcbiAgICBjb25zdCBhcHAgPSBleHByZXNzKCk7XG4gICAgYXBwLnVzZShtZXRob2RPdmVycmlkZSgnWC1IVFRQLU1ldGhvZCcpKTtcbiAgICBhcHAudXNlKG1ldGhvZE92ZXJyaWRlKCdYLUhUVFAtTWV0aG9kLU92ZXJyaWRlJykpO1xuICAgIGFwcC51c2UobWV0aG9kT3ZlcnJpZGUoJ1gtTWV0aG9kLU92ZXJyaWRlJykpO1xuICAgIGFwcC51c2UobWV0aG9kT3ZlcnJpZGUoJ19tZXRob2QnKSk7XG4gICAgcmV0dXJuIGFwcDtcbiAgfVxufVxuXG5PYmplY3Quc2VhbChNZXRob2RPdmVycmlkZSk7XG5leHBvcnQgPSBNZXRob2RPdmVycmlkZTtcbiJdfQ==

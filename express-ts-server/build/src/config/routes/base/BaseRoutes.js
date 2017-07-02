@@ -1,0 +1,15 @@
+"use strict";
+const express = require("express");
+const FlowerRoutes = require("./../FlowerRoutes");
+const ClassifiedImageRoutes = require("./../ClassifiedImageRoutes");
+let app = express();
+class BaseRoutes {
+    get routes() {
+        app.use('/', new FlowerRoutes().routes);
+        app.use('/', new ClassifiedImageRoutes().routes);
+        return app;
+    }
+}
+module.exports = BaseRoutes;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb25maWcvcm91dGVzL2Jhc2UvQmFzZVJvdXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsbUNBQW9DO0FBQ3BDLGtEQUFtRDtBQUNuRCxvRUFBcUU7QUFDckUsSUFBSSxHQUFHLEdBQUcsT0FBTyxFQUFFLENBQUM7QUFFcEI7SUFFSSxJQUFJLE1BQU07UUFDTixHQUFHLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxJQUFJLFlBQVksRUFBRSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ3hDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUkscUJBQXFCLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUNqRCxNQUFNLENBQUMsR0FBRyxDQUFDO0lBQ2YsQ0FBQztDQUNKO0FBQ0QsaUJBQVMsVUFBVSxDQUFDIiwiZmlsZSI6InNyYy9jb25maWcvcm91dGVzL2Jhc2UvQmFzZVJvdXRlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpO1xuaW1wb3J0IEZsb3dlclJvdXRlcyA9IHJlcXVpcmUoJy4vLi4vRmxvd2VyUm91dGVzJyk7XG5pbXBvcnQgQ2xhc3NpZmllZEltYWdlUm91dGVzID0gcmVxdWlyZSgnLi8uLi9DbGFzc2lmaWVkSW1hZ2VSb3V0ZXMnKTtcbmxldCBhcHAgPSBleHByZXNzKCk7XG5cbmNsYXNzIEJhc2VSb3V0ZXMge1xuXG4gICAgZ2V0IHJvdXRlcygpIHtcbiAgICAgICAgYXBwLnVzZSgnLycsIG5ldyBGbG93ZXJSb3V0ZXMoKS5yb3V0ZXMpO1xuICAgICAgICBhcHAudXNlKCcvJywgbmV3IENsYXNzaWZpZWRJbWFnZVJvdXRlcygpLnJvdXRlcyk7XG4gICAgICAgIHJldHVybiBhcHA7XG4gICAgfVxufVxuZXhwb3J0ID0gQmFzZVJvdXRlcztcbiJdfQ==
