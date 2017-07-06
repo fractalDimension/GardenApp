@@ -6,6 +6,7 @@ interface MulterFile {
   originalname: string;
   size: number;
   buffer: Buffer; // actual data
+  encoding: string;
 }
 
 export = MulterFile;

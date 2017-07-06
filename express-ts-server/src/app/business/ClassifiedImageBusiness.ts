@@ -8,9 +8,37 @@ import ClassifiedImageModel = require('./../model/ClassifiedImageModel');
 import IMulterFileModel = require('./../model/interfaces/MulterFileModel');
 import date = require('date-and-time');
 
-import PythonShell = require('python-shell');
-const scriptPath = '/usr/src/express-ts-app/src/python';
-const scriptName = 'helloSnek.py';
+// import PythonShell = require('python-shell');
+// const pathToPython = '/usr/bin/python3';
+// const scriptPath = '/usr/src/express-ts-app/src/python';
+// const scriptName = 'helloSnek.py';
+
+// const scriptName = 'label_image.py';
+// const tempDir = '/tmp/'; // TODO manually manage the dir instead of relying on the system
+// import fs = require('fs');
+
+// const grpc = require('grpc');
+// const grpcConfig = 'localhost:9000';
+// import { ServingClient } from './tensorflow-serving-node-client';
+// const client = new ServingClient(grpcConfig);
+// const resolve = require('path').resolve;
+// Load Protocol Buffers
+/*
+const proto = grpc.load({
+  file: 'protos/predict.proto',
+  root: resolve( __dirname, 'proto')
+}).tensorflow.serving;
+*/
+// const protoPath = resolve( __dirname, './protos/predict.proto');
+// const protoPath = '/usr/src/express-ts-app/src/app/business/protos/predict.proto';
+// console.log(protoPath);
+// const proto = grpc.load(protoPath).tensorflow.serving;
+
+// const PredictService = proto.PredictService;
+// Create TensorFlow Serving MNIST client
+// const client = new PredictService( grpcConfig, grpc.credentials.createInsecure() );
+
+const client = require('tensorflow-serving-node-client')('localhost:9000');
 
 
 class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
@@ -30,34 +58,95 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
     imageToClassify.date_uploaded = date.format(new Date(), 'YYYY/MM/DD HH:mm:ss');
     imageToClassify.img = {
       data: req.file.buffer,
+      encoding: req.file.encoding,
       content_type: getFileType(req.file.originalname)
     };
 
     this._classifiedImageRepository.create(imageToClassify, callback);
   }
 
+  // TODO deal with calback hell, async/await?
+
   classify (res: Response, callback: (error: any, result: any) => void) {
     console.log('I should do something with this id: ', res.locals._id);
+    // get document and save image to tmp directory
+    this.findById( res.locals._id, function (err: any, results: IClassifiedImageModel) {
+      console.log('found doc by id: ', res.locals._id);
+      console.log('name?: ', results.image_name);
+      // const filePath = tempDir + results.image_name;
+      const imageData = results.img.data;
+      const imageEncoding = results.img.encoding;
 
-    console.log('running python script');
+      client.predict(imageData, (predErr: any, predRes: any) => {
+        if (predErr) {
+          console.log('error in predict');
+          console.log(predErr);
+          return callback( predErr, predRes);
+          // return console.error(err);
+        }
+        console.log(predRes);
+        return callback( null, predRes);
+      });
 
-    const options = {
-      scriptPath: scriptPath,
-      args: ['running with id: ' + res.locals._id]
-    };
 
-    PythonShell.run( scriptName, options, function (err: any, results: any) {
-      if (err) {
-        console.log('error in shell');
-        console.log(err);
-        callback( err, results);
-        // throw err;
-      } else {
-        // results is an array consisting of messages collected during execution
-        console.log('results: %j', results);
-        callback( null, results);
-      }
+      /*
+      client.predict( {imageData}, (predErr: any, predRes: any) => {
+        if (predErr) {
+
+          console.log('error in predict');
+          console.log(predErr);
+          return callback( predErr, predRes);
+          // return console.error(predErr);
+        }
+        console.log(predRes);
+        const predResult: any = predRes ? predRes.value : [];
+
+        const percentages = predResult.map((result: any) => Math.ceil(result * 10000) / 100);
+        console.log('results: %j', percentages);
+        return callback( null, percentages);
+      });
+      */
+
+      // TODO check if file is already in tmp directory
+
+      /*
+      fs.writeFile( filePath, imageData, {encoding: imageEncoding}, function( wfErr ) {
+        if ( wfErr ) {
+          console.log('error in writing file: ', wfErr);
+          // throw err;
+        }
+        console.log('The file has been saved!');
+
+        // the argument is the tempfile path to the image
+        const options = {
+          scriptPath: scriptPath,
+          pythonPath: pathToPython,
+          args: [filePath]
+        };
+
+        console.log('running python script');
+
+        
+        PythonShell.run( scriptName, options, function (shellErr: any, shellResults: any) {
+          if (shellErr) {
+            console.log('error in shell');
+            console.log(shellErr);
+            callback( shellErr, shellResults);
+            // throw err;
+          } else {
+            // results is an array consisting of messages collected during execution
+            console.log('results: %j', shellResults);
+            callback( null, shellResults);
+          }
+        });
+        
+      });
+      */
     });
+
+
+
+
   }
 
   retrieve (callback: (error: any, result: any) => void) {

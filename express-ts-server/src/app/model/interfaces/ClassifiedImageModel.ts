@@ -6,6 +6,7 @@ interface ClassifiedImageModel extends mongoose.Document {
   date_uploaded: Date;
   img: {
     data: Buffer;
+    encoding: string;
     content_type: string;
   };
   predictions: [
