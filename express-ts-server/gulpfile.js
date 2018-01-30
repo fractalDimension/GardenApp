@@ -25,10 +25,11 @@ const TEST = "test";
 const REMAP_COVERAGE = "remap:coverage";
 
 const TS_SRC_GLOB = "./src/**/*.ts";
+const D_TS_SRC_GLOB = "./src/**/*d.ts"; // include for generated proto files
 const TS_TEST_GLOB = "./test/**/*.ts";
 const JS_TEST_GLOB = "./build/test/**/*.js";
 const JS_SRC_GLOB = "./build/src/**/*.js";
-const TS_GLOB = [TS_SRC_GLOB, TS_TEST_GLOB];
+const TS_GLOB = [TS_SRC_GLOB, D_TS_SRC_GLOB, TS_TEST_GLOB];
 
 const tsProject = typescript.createProject("tsconfig.json");
 
@@ -47,6 +48,7 @@ gulp.task(CLEAN_DOC, function(callback) {
     rimraf("./docs", callback);
 });
 
+/*
 // Checks all *.ts-files if they are conform to the rules specified in tslint.json.
 gulp.task(TSLINT, function() {
     return gulp.src(TS_GLOB)
@@ -56,6 +58,7 @@ gulp.task(TSLINT, function() {
             emitError: false
         }));
 });
+*/
 
 // Compiles all *.ts-files to *.js-files.
 gulp.task(COMPILE_TYPESCRIPT, function() {
@@ -68,7 +71,8 @@ gulp.task(COMPILE_TYPESCRIPT, function() {
 
 // Runs all required steps for the build in sequence.
 gulp.task(BUILD, function(callback) {
-    runSequence(CLEAN_BUILD, TSLINT, COMPILE_TYPESCRIPT, callback);
+    //runSequence(CLEAN_BUILD, TSLINT, COMPILE_TYPESCRIPT, callback);
+    runSequence(CLEAN_BUILD, COMPILE_TYPESCRIPT, callback);
 });
 
 // Generates a documentation based on the code comments in the *.ts files.

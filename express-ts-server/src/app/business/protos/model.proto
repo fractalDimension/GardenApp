@@ -15,4 +15,5 @@ message ModelSpec {
   // co-trained and/or have inter-dependencies on the versions used at inference
   // time.
   //google.protobuf.Int64Value version = 2;
+  string signature_name = 3;
 }

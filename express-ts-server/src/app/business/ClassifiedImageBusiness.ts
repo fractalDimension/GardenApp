@@ -18,31 +18,16 @@ import date = require('date-and-time');
 // import fs = require('fs');
 
 // const grpc = require('grpc');
-// const grpcConfig = 'localhost:9000';
-// import { ServingClient } from './tensorflow-serving-node-client';
-// const client = new ServingClient(grpcConfig);
-// const resolve = require('path').resolve;
-// Load Protocol Buffers
-/*
-const proto = grpc.load({
-  file: 'protos/predict.proto',
-  root: resolve( __dirname, 'proto')
-}).tensorflow.serving;
-*/
-// const protoPath = resolve( __dirname, './protos/predict.proto');
-// const protoPath = '/usr/src/express-ts-app/src/app/business/protos/predict.proto';
-// console.log(protoPath);
-// const proto = grpc.load(protoPath).tensorflow.serving;
+//const grpcConfig = 'localhost:9000';
+const grpcConfig = 'tensorflow-serving:9000';
+import PredictClient from './predict-client';
+const client = new PredictClient(grpcConfig);
 
-// const PredictService = proto.PredictService;
-// Create TensorFlow Serving MNIST client
-// const client = new PredictService( grpcConfig, grpc.credentials.createInsecure() );
-
-const client = require('tensorflow-serving-node-client')('localhost:9000');
-
+const clientFromNodePackage = require('tensorflow-serving-node-client')(grpcConfig);
 
 class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
   private _classifiedImageRepository: ClassifiedImageRepository;
+  // private _servingClient: ServingClient;
 
   constructor () {
     this._classifiedImageRepository = new ClassifiedImageRepository();
@@ -77,6 +62,7 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
       const imageData = results.img.data;
       const imageEncoding = results.img.encoding;
 
+      console.log('using home rolled send grpc');
       client.predict(imageData, (predErr: any, predRes: any) => {
         if (predErr) {
           console.log('error in predict');
@@ -89,8 +75,20 @@ class ClassifiedImageBusiness  implements ClassifiedImageBusiness {
       });
 
 
+      // console.log('using node package to send grpc');
+      // console.log(imageData);
       /*
-      client.predict( {imageData}, (predErr: any, predRes: any) => {
+      clientFromNodePackage.predict(imageData, (predErr: any, predRes: any) => {
+        console.log('prediction error' + predErr);
+        if (predErr) {
+          return console.error(err);
+        }
+        console.log(predRes);
+      });
+      */
+
+      /*
+      client.predict( imageData, (predErr: any, predRes: any) => {
         if (predErr) {
 
           console.log('error in predict');

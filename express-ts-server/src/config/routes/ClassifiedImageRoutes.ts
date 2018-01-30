@@ -15,10 +15,10 @@ class ClassifiedImageRoutes {
   private _classifieImageController: ClassifiedImageController;
 
   constructor () {
-    this._classifieImageController = new ClassifiedImageController();
+    this._classifyImageController = new ClassifiedImageController();
   }
   get routes () {
-    const controller = this._classifieImageController;
+    const controller = this._classifyImageController;
     router.get('/allClassifiedImages', controller.retrieve);
     router.post('/classifyImage', upload, controller.create, controller.classify);
     router.put('/classifiedImages/:_id', controller.update);

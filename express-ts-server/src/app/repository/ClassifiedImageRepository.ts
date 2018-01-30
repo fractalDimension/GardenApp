@@ -9,7 +9,6 @@ class ClassifiedImageRepository  extends RepositoryBase<IClassifiedImageModel> {
   }
 
   retrieve (callback: (error: any, result: any) => void) {
-    console.log('override retreive');
     this._model.find({}).sort('-date_uploaded').exec(callback);
   }
 }

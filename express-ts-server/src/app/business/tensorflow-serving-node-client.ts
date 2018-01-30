@@ -13,19 +13,21 @@ const protoPath = '/usr/src/express-ts-app/src/app/business/protos/predict.proto
  *
  * @param      {string}  connection  Tensorflow Serving connection string. E.g., localhost:9000
  */
-export class ServingClient {
-  private proto: any;
-  private predictionService: any;
-  private client: any;
+export default class ServingClient {
+  private TensorflowServing: any;
+  // private predictionService: any;
+  private predictionClient: any;
 
   constructor (connection: string) {
     // loading service proto
     console.log(protoPath);
-    this.proto = grpc.load(protoPath).tensorflow.serving;
-    this.predictionService = this.proto.PredictionService;
-
+    this.TensorflowServing = grpc.load(protoPath).tensorflow.serving;
     // creating gRPC service client
-    const predClient = this.predictionService( connection, grpc.credentials.createInsecure() );
+    this.predictionClient = new this.TensorflowServing.PredictionService(
+      connection,
+      grpc.credentials.createInsecure()
+    );
+
   }
 
   /**
@@ -35,7 +37,7 @@ export class ServingClient {
    * @param      {Function}              fn      Callback.
    */
   predict (buffer: any, fn: any) {
-    
+
     let buffers;
     if (buffer.constructor === Array) {
       buffers = buffer;
@@ -45,7 +47,7 @@ export class ServingClient {
 
     // building PredictRequest proto message
     const msg = {
-      model_spec: { name: 'saved_model' },
+      model_spec: { name: 'inception' },
       inputs: {
         images: {
           dtype: 'DT_STRING',
@@ -61,14 +63,14 @@ export class ServingClient {
 
 
     // calling gRPC method
-    this.client.predict(msg, (err, response) => {
+    this.predictionClient.predict(msg, (err, response) => {
       if (err) { return fn(err); }
 
       // decoding response
       const classes = response.outputs.classes.string_val.map((b) => b.toString('utf8'));
 
       // splitting results
-      let i
+      let i;
       const len = classes.length,
             chunk = 5,
             results = [];
@@ -76,7 +78,7 @@ export class ServingClient {
         results.push(classes.slice(i, i + chunk));
       }
 
-      fn(null, results)
+      fn(null, results);
     });
 
   }
